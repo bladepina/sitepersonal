@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>// blade_logs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="site-title">// blade_logs</span>
+      <span class="site-sub">pensieri in ordine sparso</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="filter-bar">
+      <button class="tag-btn active" data-tag="all">tutti</button>
+      <button class="tag-btn" data-tag="tech">tech</button>
+      <button class="tag-btn" data-tag="ai">AI</button>
+      <button class="tag-btn" data-tag="random">random</button>
+      <button class="tag-btn" data-tag="fishing">pesca</button>
+      <button class="tag-btn" data-tag="gaming">gaming</button>
+      <button class="tag-btn" data-tag="animals">animali</button>
+    </section>
+
+    <section class="posts-grid" id="postsGrid"></section>
+  </main>
+
+  <div class="post-overlay" id="postOverlay">
+    <div class="post-modal" id="postModal">
+      <button class="close-btn" id="closeBtn">&#x2715;</button>
+      <div class="post-modal-inner" id="postModalInner"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span>nessun cookie. nessun tracciamento. solo parole.</span>
+  </footer>
+
+  <script src="posts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
