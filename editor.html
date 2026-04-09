@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>// editor — blade_logs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --surface2: #1a1a1a;
+      --surface-hover: #1f1f1f;
+      --border: #2a2a2a;
+      --border-focus: #444;
+      --text: #d4d4d4;
+      --text-muted: #5a5a5a;
+      --text-dim: #888;
+      --accent: #7fff7f;
+      --accent-dim: #3a6b3a;
+      --tag-tech: #4fa8ff;
+      --tag-ai: #b47fff;
+      --tag-random: #ff9f4a;
+      --tag-fishing: #4fcfcf;
+      --tag-gaming: #ff6b6b;
+      --tag-animals: #ffd166;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
+      --radius: 6px;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
+      background: rgba(14,14,14,0.95);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: baseline; gap: 16px;
+    }
+    .site-title { font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--accent); }
+    .site-sub { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.04em; }
+
+    /* ── LAYOUT ── */
+    .workspace {
+      max-width: 1200px; margin: 0 auto; padding: 36px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .panel-label {
+      font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em;
+      color: var(--text-muted); text-transform: uppercase; margin-bottom: 14px;
+    }
+
+    /* ── FORM ── */
+    .editor-panel { display: flex; flex-direction: column; gap: 18px; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      font-family: var(--font-mono); font-size: 0.67rem; color: var(--text-muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    input[type="text"], input[type="date"], textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 10px 14px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.15s;
+      resize: vertical;
+    }
+    input:focus, textarea:focus { border-color: var(--border-focus); }
+    textarea { min-height: 80px; line-height: 1.6; }
+    #bodyInput { min-height: 200px; font-family: var(--font-sans); }
+
+    .hint { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; }
+    .hint code { font-family: var(--font-mono); font-size: 0.75em; color: var(--accent); background: rgba(127,255,127,0.07); padding: 1px 5px; border-radius: 3px; }
+
+    /* ── TAG CHECKBOXES ── */
+    .tag-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .tag-check { display: none; }
+    .tag-label {
+      font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.05em;
+      padding: 4px 12px; border-radius: 3px; border: 1px solid var(--border);
+      cursor: pointer; transition: all 0.15s; color: var(--text-muted);
+      user-select: none;
+    }
+    .tag-check:checked + .tag-label { border-color: var(--accent); color: var(--accent); background: rgba(127,255,127,0.06); }
+
+    /* ── OUTPUT ── */
+    .output-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.65;
+      color: var(--text-dim);
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 280px;
+      overflow-y: auto;
+      cursor: text;
+    }
+
+    .copy-btn {
+      align-self: flex-start;
+      background: transparent;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      padding: 7px 18px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-top: 4px;
+    }
+    .copy-btn:hover { background: rgba(127,255,127,0.06); border-color: var(--accent); }
+    .copy-btn.copied { color: #fff; border-color: #fff; }
+
+    /* ── PREVIEW PANEL ── */
+    .preview-panel { display: flex; flex-direction: column; gap: 28px; }
+
+    /* Card preview */
+    .post-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      display: flex; flex-direction: column; gap: 10px;
+      position: relative; overflow: hidden;
+      transition: background 0.18s, border-color 0.18s, transform 0.18s;
+      cursor: pointer;
+    }
+    .post-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: transparent; transition: background 0.18s;
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+    .post-card:hover { background: var(--surface-hover); border-color: #3a3a3a; transform: translateX(3px); }
+    .post-card:hover::before { background: var(--accent); }
+
+    .post-card-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .post-date { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.05em; }
+    .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .tag { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 2px; font-weight: 700; text-transform: uppercase; }
+    .tag-tech    { color: var(--tag-tech);    background: rgba(79,168,255,0.08); }
+    .tag-ai      { color: var(--tag-ai);      background: rgba(180,127,255,0.08); }
+    .tag-random  { color: var(--tag-random);  background: rgba(255,159,74,0.08); }
+    .tag-fishing { color: var(--tag-fishing); background: rgba(79,207,207,0.08); }
+    .tag-gaming  { color: var(--tag-gaming);  background: rgba(255,107,107,0.08); }
+    .tag-animals { color: var(--tag-animals); background: rgba(255,209,102,0.08); }
+
+    .post-title { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 500; color: var(--text); line-height: 1.4; letter-spacing: -0.01em; }
+    .post-excerpt { font-size: 0.88rem; color: var(--text-dim); line-height: 1.65; font-weight: 300; }
+    .post-read-more { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-dim); letter-spacing: 0.06em; margin-top: 4px; }
+    .post-card:hover .post-read-more { color: var(--accent); }
+
+    /* Modal preview */
+    .modal-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+    }
+    .modal-date { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 8px; }
+    .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+    .modal-title { font-family: var(--font-sans); font-size: 1.35rem; font-weight: 500; color: var(--text); line-height: 1.35; letter-spacing: -0.02em; margin-bottom: 24px; }
+    .modal-body { font-size: 0.93rem; line-height: 1.8; color: var(--text); font-weight: 300; }
+    .modal-body p { margin-bottom: 1.2em; }
+    .modal-body p:last-child { margin-bottom: 0; }
+    .modal-body code { font-family: var(--font-mono); font-size: 0.85em; background: rgba(127,255,127,0.06); color: var(--accent); padding: 1px 6px; border-radius: 3px; }
+    .modal-body blockquote { border-left: 2px solid var(--accent-dim); padding-left: 16px; color: var(--text-dim); font-style: italic; margin: 1.2em 0; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .workspace { grid-template-columns: 1fr; }
+    }
+
+    .separator { height: 1px; background: var(--border); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="site-title">// editor</span>
+    <span class="site-sub">scrivi → copia → incolla in posts.js → push</span>
+  </div>
+</header>
+
+<div class="workspace">
+
+  <!-- ── COLONNA SINISTRA: FORM ── -->
+  <div class="editor-panel">
+    <div class="panel-label">// nuovo post</div>
+
+    <div class="field">
+      <label>data</label>
+      <input type="date" id="dateInput" />
+    </div>
+
+    <div class="field">
+      <label>tag (uno o più)</label>
+      <div class="tag-grid">
+        <input type="checkbox" class="tag-check" id="t-tech"    value="tech"    /><label class="tag-label" for="t-tech">#tech</label>
+        <input type="checkbox" class="tag-check" id="t-ai"      value="ai"      /><label class="tag-label" for="t-ai">#ai</label>
+        <input type="checkbox" class="tag-check" id="t-random"  value="random"  /><label class="tag-label" for="t-random">#random</label>
+        <input type="checkbox" class="tag-check" id="t-fishing" value="fishing" /><label class="tag-label" for="t-fishing">#pesca</label>
+        <input type="checkbox" class="tag-check" id="t-gaming"  value="gaming"  /><label class="tag-label" for="t-gaming">#gaming</label>
+        <input type="checkbox" class="tag-check" id="t-animals" value="animals" /><label class="tag-label" for="t-animals">#animali</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>titolo</label>
+      <input type="text" id="titleInput" placeholder="Il titolo del pensiero..." />
+    </div>
+
+    <div class="field">
+      <label>anteprima (una riga)</label>
+      <input type="text" id="excerptInput" placeholder="Quello che si vede sulla card..." />
+    </div>
+
+    <div class="field">
+      <label>testo completo</label>
+      <textarea id="bodyInput" placeholder="Scrivi qui il post. Vai a capo per paragrafi separati.&#10;&#10;Puoi usare:&#10;  `codice` → per testo tecnico inline&#10;  > citazione → per una blockquote"></textarea>
+      <span class="hint">
+        vai a capo = paragrafo &nbsp;·&nbsp;
+        <code>`testo`</code> = codice inline &nbsp;·&nbsp;
+        <code>> testo</code> = citazione
+      </span>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="panel-label">// codice generato — incolla in posts.js</div>
+    <div class="output-box" id="outputBox"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyCode()">copia codice</button>
+  </div>
+
+  <!-- ── COLONNA DESTRA: PREVIEW ── -->
+  <div class="preview-panel">
+    <div>
+      <div class="panel-label">// anteprima card</div>
+      <div class="post-card" onclick="void(0)">
+        <div class="post-card-top">
+          <span class="post-date" id="prev-date"></span>
+          <div class="post-tags" id="prev-tags-card"></div>
+        </div>
+        <h2 class="post-title" id="prev-title">Il titolo apparirà qui</h2>
+        <p class="post-excerpt" id="prev-excerpt">L'anteprima apparirà qui...</p>
+        <span class="post-read-more">leggi →</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-label">// anteprima modal (post completo)</div>
+      <div class="modal-preview">
+        <div class="modal-date" id="prev-modal-date"></div>
+        <div class="modal-tags" id="prev-tags-modal"></div>
+        <h1 class="modal-title" id="prev-modal-title">Il titolo apparirà qui</h1>
+        <div class="modal-body" id="prev-modal-body"><p style="color:var(--text-muted)">Il testo del post apparirà qui...</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── UTILS ──────────────────────────────────────────────────
+
+function today() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function formatDate(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-');
+  const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
+}
+
+function getSelectedTags() {
+  return [...document.querySelectorAll('.tag-check:checked')].map(c => c.value);
+}
+
+function buildTagHTML(tags) {
+  return tags.map(t => `<span class="tag tag-${t}">#${t}</span>`).join('');
+}
+
+// Converte il testo grezzo in HTML (paragrafi, codice inline, blockquote)
+function textToHTML(raw) {
+  if (!raw.trim()) return '';
+  const lines = raw.split(/\n/);
+  const paras = [];
+  let current = [];
+
+  lines.forEach(line => {
+    if (line.trim() === '') {
+      if (current.length) { paras.push(current.join('\n')); current = []; }
+    } else {
+      current.push(line);
+    }
+  });
+  if (current.length) paras.push(current.join('\n'));
+
+  return paras.map(p => {
+    const trimmed = p.trim();
+    let html;
+    if (trimmed.startsWith('> ')) {
+      html = '<blockquote>' + inlineFormat(trimmed.slice(2)) + '</blockquote>';
+    } else {
+      html = '<p>' + inlineFormat(trimmed) + '</p>';
+    }
+    return html;
+  }).join('\n');
+}
+
+function inlineFormat(text) {
+  // escape HTML entities first
+  text = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // backtick code
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  return text;
+}
+
+// Genera il body HTML come stringa da mettere nel template literal
+function buildBodyForOutput(raw) {
+  return textToHTML(raw);
+}
+
+// ── NEXT ID ────────────────────────────────────────────────
+
+function getNextId() {
+  // legge posts.js via fetch se siamo su file:// non funziona,
+  // quindi usiamo un input manuale come fallback
+  return document.getElementById('idInput') ? parseInt(document.getElementById('idInput').value) || 99 : 99;
+}
+
+// ── AGGIORNA PREVIEW ───────────────────────────────────────
+
+function update() {
+  const date    = document.getElementById('dateInput').value;
+  const title   = document.getElementById('titleInput').value.trim();
+  const excerpt = document.getElementById('excerptInput').value.trim();
+  const body    = document.getElementById('bodyInput').value;
+  const tags    = getSelectedTags();
+
+  const dateStr = formatDate(date);
+  const tagHTML = buildTagHTML(tags);
+  const bodyHTML = textToHTML(body);
+
+  // card preview
+  document.getElementById('prev-date').textContent = dateStr;
+  document.getElementById('prev-tags-card').innerHTML = tagHTML;
+  document.getElementById('prev-title').textContent = title || 'Il titolo apparirà qui';
+  document.getElementById('prev-excerpt').textContent = excerpt || "L'anteprima apparirà qui...";
+
+  // modal preview
+  document.getElementById('prev-modal-date').textContent = dateStr;
+  document.getElementById('prev-tags-modal').innerHTML = tagHTML;
+  document.getElementById('prev-modal-title').textContent = title || 'Il titolo apparirà qui';
+  document.getElementById('prev-modal-body').innerHTML = bodyHTML || '<p style="color:var(--text-muted)">Il testo del post apparirà qui...</p>';
+
+  // output code
+  const tagsArray = JSON.stringify(tags);
+  const titleEsc  = title.replace(/`/g, '\\`').replace(/\\/g, '\\\\') ;
+  const excerptEsc = excerpt.replace(/`/g, '\\`');
+  const bodyEsc   = bodyHTML.replace(/`/g, '\\`').replace(/\\/g, '\\\\');
+
+  const code = `  {
+    id: ?,           // ← sostituisci con il prossimo numero
+    date: "${date}",
+    tags: ${tagsArray},
+    title: "${title.replace(/"/g, '\\"')}",
+    excerpt: "${excerpt.replace(/"/g, '\\"')}",
+    body: \`${bodyHTML}\`
+  },`;
+
+  document.getElementById('outputBox').textContent = code;
+}
+
+// ── COPY ───────────────────────────────────────────────────
+
+function copyCode() {
+  const code = document.getElementById('outputBox').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ copiato';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copia codice'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ── INIT ───────────────────────────────────────────────────
+
+document.getElementById('dateInput').value = today();
+
+['dateInput','titleInput','excerptInput','bodyInput'].forEach(id => {
+  document.getElementById(id).addEventListener('input', update);
+});
+document.querySelectorAll('.tag-check').forEach(c => c.addEventListener('change', update));
+
+update();
+</script>
+</body>
+</html>
