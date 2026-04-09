@@ -21,6 +21,32 @@ Apri `posts.js` e aggiungi un oggetto all'array `POSTS`:
 }
 ```
 
+### Come pubblicarlo online (GitHub Pages)
+
+Questo progetto è statico (solo `index.html`, `style.css`, `app.js`, `posts.js`), quindi puoi pubblicarlo direttamente con GitHub Pages:
+
+1. fai push del repository su GitHub
+2. vai in **Settings → Pages**
+3. in **Build and deployment**, seleziona:
+   - **Source**: `Deploy from a branch`
+   - **Branch**: `main` (o il branch che usi) / `/root`
+4. salva e attendi il deploy (1-2 minuti)
+5. il sito sarà disponibile all'URL mostrato in quella pagina (es. `https://<username>.github.io/<repo>/`)
+
+Se vuoi usare un dominio custom:
+
+1. in **Settings → Pages** imposta il dominio in **Custom domain**
+2. configura i record DNS (`CNAME` o `A`) presso il tuo provider
+3. abilita **Enforce HTTPS** quando disponibile
+
+Per test locale rapido puoi aprire direttamente `index.html` nel browser, oppure avviare un server statico:
+
+```bash
+python3 -m http.server 8080
+```
+
+e poi visita `http://localhost:8080`.
+
 ### Stack
 
 - HTML / CSS / JS vanilla
