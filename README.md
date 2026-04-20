@@ -1,4 +1,4 @@
-# blade_logs
+# ci_penso
 
 > uno spazio personale. pensieri in ordine sparso.
 

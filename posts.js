@@ -11,4 +11,13 @@ const POSTS = [
 <p>Un posto dove buttare giù quello che ho in testa, senza filtri, senza algoritmi che decidono cosa vale la pena dire.</p>
 <p>Forse non lo leggerà nessuno. Va bene così.</p>`
   }
+{
+    id: 2,
+    date: "2026-04-20",
+    tags: ["random", "celebrations"],
+    title: "Again and again...",
+    excerpt: "Birthday Celebration and the joy of being together.",
+    body: `<p>Compleanno appena passato e la voglia di stare insieme alle persone care. La vita è stancante, ma ogni tanto è bello fermarsi e guardare le persone care che ti stanno intorno.</p>
+    <p>Ora è ora di rimettersi in viaggio, ripartire ed andare avanti</p>`
+  }
 ];
