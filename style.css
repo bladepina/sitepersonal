@@ -210,6 +210,7 @@ body {
 .tag-fishing { color: var(--tag-fishing); background: rgba(79,207,207,0.08); }
 .tag-gaming { color: var(--tag-gaming); background: rgba(255,107,107,0.08); }
 .tag-animals { color: var(--tag-animals); background: rgba(255,209,102,0.08); }
+.tag-famiglia { color: var(--tag-famiglia); background: rgba(255,159,74,0.08); }
 
 .post-title {
   font-family: var(--font-sans);
