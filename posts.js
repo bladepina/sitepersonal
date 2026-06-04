@@ -44,5 +44,34 @@ const POSTS = [
 <p>Le persone vicine a me non hanno bisogno della mia efficienza. Hanno bisogno di me. Di quello che sento, di quello che penso, di come sto. E io ho bisogno di loro — anche se a volte lo dimentico.</p>
 <p>Scrivere questa cosa qui è già un passo. Ricordarmi che esistono valori più grandi delle priorità di questa settimana. Che la famiglia, gli amici veri, le persone che rimangono — quelli sono i fondamentali. Il resto è contorno.</p>
 <p>Non voglio aspettare un altro compleanno, o un momento difficile, per ricordarmi di esserci davvero.</p>`
+  },
+  {
+    id: 5,
+    date: "2026-05-15",
+    tags: ["emozioni", "resilienza", "tempo"],
+    title: "Anche questo passerà.",
+    excerpt: "I momenti difficili sembrano eterni. Non lo sono. E anche quando restano, si impara a trovarci spazio intorno.",
+    body: `<p>C'è una cosa che nei momenti neri faccio fatica a ricordarmi: che sono momenti. Non stati permanenti. Non la nuova versione della mia vita.</p>
+<p>Quando stai dentro a qualcosa di difficile — una perdita, una stanchezza profonda, un periodo in cui tutto sembra storto — è quasi impossibile vedere al di là. Il presente diventa tutto. E il tutto sembra sempre così pesante.</p>
+<p>Ma poi passa. O almeno si trasforma.</p>
+<p>Non sempre si guarisce in modo netto, con un confine preciso tra il prima e il dopo. A volte si impara a conviverci. A portare con sé quella cosa pesante senza che ti blocchi i passi. Si trova un ritmo diverso. Più lento, magari, ma comunque un ritmo.</p>
+<p>L'ho vissuto abbastanza volte da crederci, anche se ogni volta faccio fatica a crederci sul momento.</p>
+<p>E penso che questo valga per tante persone — molto più di quante lo dichiarino. Perché i momenti difficili si nascondono bene. Si portano in silenzio, con il pilota automatico acceso, continuando a fare le cose di sempre mentre dentro si sta navigando qualcosa di complicato.</p>
+<p>Se sei in uno di quei momenti adesso: non devi uscirne subito. Non devi "stare bene" secondo una tempistica che non esiste. Devi solo continuare ad andare avanti, anche di poco. Anche un giorno alla volta.</p>
+<p>Anche questo passerà. O almeno, troverai il modo di farci spazio.</p>`
+  },
+  {
+    id: 6,
+    date: "2026-06-04",
+    tags: ["famiglia", "tranquillita", "valori"],
+    title: "Scelgo la pace.",
+    excerpt: "Non devo seguire quello che si aspettano gli altri: oggi scelgo la calma, la mia famiglia e le persone che mi fanno stare bene.",
+    body: `<p>Ci sono giorni in cui tutti sembrano sapere cosa dovrei fare io. Dove dovrei andare, come dovrei vivere, cosa dovrei inseguire.</p>
+<p>Io, invece, sento altro.</p>
+<p>Con il tempo ho capito che non sono piu quello di prima. Non sono piu cosi amante delle feste, del rumore, del dover esserci per forza. Non mi manca quella corsa.</p>
+<p>Mi fa stare meglio una serata semplice, una cena in casa, due parole vere con la mia famiglia, un momento tranquillo con chi mi sta intorno e mi vuole bene davvero.</p>
+<p>Questa non e chiusura. E una scelta. E il mio modo di stare bene.</p>
+<p>Voglio proteggere questa pace. Voglio dare tempo alle persone che contano, senza sentirmi in difetto se non seguo il copione degli altri.</p>
+<p>Alla fine, i valori veri restano sempre gli stessi: affetto, presenza, serenita. Il resto puo aspettare.</p>`
   }
 ];
