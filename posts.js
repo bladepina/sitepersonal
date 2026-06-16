@@ -73,5 +73,24 @@ const POSTS = [
 <p>Questa non e chiusura. E una scelta. E il mio modo di stare bene.</p>
 <p>Voglio proteggere questa pace. Voglio dare tempo alle persone che contano, senza sentirmi in difetto se non seguo il copione degli altri.</p>
 <p>Alla fine, i valori veri restano sempre gli stessi: affetto, presenza, serenita. Il resto puo aspettare.</p>`
+  },
+  {
+    id: 7,
+    date: "2026-06-16",
+    tags: ["resilienza", "adattamento", "crescita"],
+    title: "Alla fine va sempre bene.",
+    excerpt: "Il cambiamento è l'unica costante. E la capacità di adattarsi è il vero superpotere. Si esce sempre più forti.",
+    body: `<p>C'è una cosa che ho imparato sulla mia pelle — e che tante persone capiranno ascoltandomi — è che alla fine va sempre bene.</p>
+<p>Non intendo dire che tutto si risolve come in una favola. Non è così. Intendo dire che non c'è una situazione, per quanto difficile, da cui non si possa uscire. E non solo uscirne: esserne trasformati. In meglio.</p>
+<p>Il cambiamento arriva comunque. Lo cerchi o no. È inevitabile. E per una lunghissimo tempo ho combattuto contro di lui — cercando di mantenere tutto come era, convinto che l'immobilità fosse sicurezza.</p>
+<p>Non lo è.</p>
+<p>Ho scoperto che la vera forza non è la rigidità — è la flessibilità. È la capacità di guardare una situazione nuova e dire: "Ok, non è quello che mi aspettavo, ma vediamo cosa posso fare con questo".</p>
+<p>Ogni volta che mi sono adattato — e sono stato costretto a farlo — ho scoperto cose di me che non conoscevo. Ho trovato risorse che non sapevo di avere. Ho fatto scelte che non avrei mai fatto se il cambiamento non mi avesse spinto.</p>
+<p>E ogni volta, sono uscito più forte di prima.</p>
+<p>Non parlo solo di problemi grandi. Parlo di cambiamenti di lavoro, di relazioni che finiscono, di progetti che saltano, di piani che vanno a monte. Tutte quelle cose che sembrano disastri nel momento.</p>
+<p>Ma dopo? Dopo capisci che erano solo pietre miliari sulla strada verso qualcosa di meglio. O almeno, verso una versione di te stesso più consapevole e più resiliente.</p>
+<p>Quindi se adesso stai attraversando un cambiamento che non avevi scelto, che ti fa paura, che ti sembra impossibile da gestire: sappi che non è il finale della tua storia. È uno dei capitoli. E probabilmente tra qualche mese guarderai indietro e capirai che avevi bisogno di quello, proprio in quel momento.</p>
+<p>Adattarsi non è arrendersi. È evolversi. E ogni volta che evolvi, esci più forte.</p>
+<p>Fidati di questo. Io l'ho visto accadere troppe volte per dubitarne.</p>`
   }
 ];
