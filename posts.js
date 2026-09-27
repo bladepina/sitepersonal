@@ -92,5 +92,16 @@ const POSTS = [
 <p>Quindi se adesso stai attraversando un cambiamento che non avevi scelto, che ti fa paura, che ti sembra impossibile da gestire: sappi che non è il finale della tua storia. È uno dei capitoli. E probabilmente tra qualche mese guarderai indietro e capirai che avevi bisogno di quello, proprio in quel momento.</p>
 <p>Adattarsi non è arrendersi. È evolversi. E ogni volta che evolvi, esci più forte.</p>
 <p>Fidati di questo. Io l'ho visto accadere troppe volte per dubitarne.</p>`
+  },
+    {
+    id: 8,
+    date: "2026-09-27",
+    tags: ["emozioni"],
+    title: "Fuori",
+    excerpt: "Magari non significa niente. Però un po’ dispiace lo stesso.",
+    body: `<p>A volte non sai nemmeno se ci sia un motivo.</p>
+<p>Vedi una festa, riconosci persone che consideri amici e ti accorgi semplicemente che tu non c’eri.</p>
+<p>Magari si sono dimenticati. Magari non ci hanno pensato. Magari non significa niente.</p>
+<p>Però un po’ dispiace lo stesso.</p>`
   }
 ];
