@@ -103,5 +103,16 @@ const POSTS = [
 <p>Vedi una festa, riconosci persone che consideri amici e ti accorgi semplicemente che tu non c’eri.</p>
 <p>Magari si sono dimenticati. Magari non ci hanno pensato. Magari non significa niente.</p>
 <p>Però un po’ dispiace lo stesso.</p>`
+  },
+  {
+    id: 9,
+    date: "2026-11-05",
+    tags: ["random", "tempo"],
+    title: "Un giorno qualunque.",
+    excerpt: "Non serve che succeda qualcosa di speciale per trovare qualcosa da tenere.",
+    body: `<p>Ci sono giorni in cui non succede niente da raccontare. Si fanno le solite cose, si risponde a qualche messaggio, si arriva a sera.</p>
+<p>Eppure, in mezzo, qualcosa c'è. Un caffè bevuto con calma. Una battuta che fa ridere. Una canzone che non sentivi da un po'.</p>
+<p>Sono cose piccole, che spesso lascio passare senza farci caso.</p>
+<p>Oggi mi va di scriverle qui. Anche un giorno qualunque può avere qualcosa da tenere.</p>`
   }
 ];
